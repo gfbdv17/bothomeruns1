@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: mlb-homerun-bot
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python bot.py
+    envVars:
+      - key: TWITTER_BEARER_TOKEN
+        sync: false          # lo pones manualmente en Render Dashboard
+      - key: TWITTER_USERNAME
+        value: MLBHRvideos
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: TELEGRAM_CHANNEL_ID
+        sync: false          # ej: @micanal  o  -1001234567890
+      - key: CHECK_INTERVAL_MIN
+        value: "5"
+      - key: SEEN_FILE
+        value: "seen_tweets.json"
+      - key: PORT
+        value: "8080"
+    healthCheckPath: /health
